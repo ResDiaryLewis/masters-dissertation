@@ -1,0 +1,11 @@
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\bin\Debug\netcoreapp2.2\AppAsHelmChart.deps.json
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\bin\Debug\netcoreapp2.2\AppAsHelmChart.runtimeconfig.json
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\bin\Debug\netcoreapp2.2\AppAsHelmChart.runtimeconfig.dev.json
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\bin\Debug\netcoreapp2.2\AppAsHelmChart.dll
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\bin\Debug\netcoreapp2.2\AppAsHelmChart.pdb
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.csprojAssemblyReference.cache
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.csproj.CoreCompileInputs.cache
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.AssemblyInfoInputs.cache
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.AssemblyInfo.cs
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.dll
+C:\Users\NicolaMossner\workspace\learning\university\FinalYearProjectProposal\AppAsHelmChart\obj\Debug\netcoreapp2.2\AppAsHelmChart.pdb

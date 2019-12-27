@@ -1,0 +1,45 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=25mm,a4paper]{geometry}
+
+\title{Distributed Tracing}
+
+\author{Nicola M\"{o}ssner \\ 2268685m}
+
+\date{Submission Date}
+
+\usepackage[numbers]{natbib}
+
+\begin{document}
+
+\maketitle
+
+\section{Semantic Specification}
+
+\begin{itemize}
+    \item Trace: A Directed Acyclig Graph (DAG) of Spans (vertices), where the edges between Spans are calles References.
+    \item Each Span encapsualtes the following state:
+    \begin{itemize}
+        \item An operation name
+        \item A start timestamp
+        \item A finish timestamp
+        \item A set of zero or more key:value Span Tags
+        \item A set of zero or more Span Logs
+        \item A SpanContext (see below)
+        \item References to zero or more casually-related SPans (cia the SpanContext of those related Spans)
+    \end{itemize}
+    Each SpanContext encapsualtes the following state:
+    \begin{itemize}
+        \item Any OpenTracing-implementation-dependent state (for example, trace and span ids) needed to refer to a distinct Span across a process boundary
+        \item Baggage Items, which are just key:value pairs that cross process boundaries 
+    \end{itemize}
+    (Source: https://opentracing.io/specification/, 29.11.2019)
+\end{itemize}
+
+
+
+\bibliographystyle{plainnat}
+
+\bibliography{bibliography}
+
+\end{document}

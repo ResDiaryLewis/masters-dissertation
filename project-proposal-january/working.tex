@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=25mm,a4paper]{geometry}
+
+\title{Proposal Title}
+
+\author{Nicola M\"{o}ssner \\ 2268685m}
+
+\date{Submission Date}
+
+\usepackage[numbers]{natbib}
+
+\begin{document}
+
+\maketitle
+
+\section{Background}
+
+% A background, including a general description of the context of the problem and relevance to the industry partner.
+
+When reflecting on the Software Development Life Cycle (SDLC) of different projects I have personally been involved in, observed, or read about, it becomes apparent to me that the last stage which is often described as the 'Maintenance stage' forms a major part of the whole software development process.
+
+It is in fact widely known and agreed on that this is the case for most software projects. Maintaining and improving an existing software application/solutin consumes a vast amount of resources and this is no different at my current employer ResDiary.
+
+Maintenance involves various disciplines, such as:
+\begin{itemize}
+    \item Correcting issues/bugs in the code.
+    \item Adapting the behaviour of the application to meet changing and evolving requirements.
+    \item Enhancing the performance of the software to improve user experience and satisfaction.
+    \item Updating technologies, platforms, frameworks and infrastructure to keep up with the latest standards and innovations, and making the required changes to the software accordingly.
+    \item Monitoring and analysing the behaviour and performance of the software.
+\end{itemize}
+
+
+When considering the Software Development Life Cycle (SDLC) of a software product, it is widely known and agreed on that the 'Maintenance' of the product is the biggest part of the development cycle and consumes a lot of resources in terms of working hours.
+I would expect a tool for tracing requests to help in the discipline of maintaining software by pointing out clear areas of improvement.
+
+Another aspect where we would hope to see benefits from such a tool, is an improved ...(resposne/reaction/fixing) time for our on-call developers who deal with alerts relating to our web-applications and databases. Allwoing them to use a 'Distributed Tracing System' to track for example slow or failing requests from users would give them an insight into where the problem occurs and allow them to fix it faster.
+
+With the growing trend of microservices, orchestrated into large-scale applications, it becomes more difficult to trace errors in the code, to spot bottle-necks and slow parts of the application, to find buggy code or to simply find areas of improvement. For example, when a request to a web application takes longer than expected, it is hard to determine if this was caused by part of the application code, a database query, perhaps some code in another web-app that the request gets routed to or a call to a third party application/library.
+
+Tracing an incoming request from start to finish, and timing how much time it takes within the different components and perhaps even functions and methods of the whole application would shed some light onto those existing issues and provide a clear and straight forward way of determining areas of improvment.
+
+\section{Problem Description}
+
+% An explanation of the nature of the problem to be addressed, the symptoms, the extent of the problem (is it specific to
+% your employer, a sector, or the wider software industry?), and associated evidence in support of your description of the
+% problem (conversations with team members, literature, personal diary entries).
+
+- How do we trace errors at the moment (Grafana, Stackify, Kibana)?
+
+- Experiences at ResDiary: Query tuning (try to improve response time of a request, only after the enhancements were made, deployed and observed over time in production, we can say for sure if the improvements tot he query had an impact. This is a slow process, through tracing we could say for sure beforehand if the query was the issue, the thing that took too long.)
+
+\section{Objectives} 
+
+% Give the set of objectives describing the outcomes of the project, either in terms of knowledge acquired through
+% experimentation or artefacts delivered (including software code, data sets, process documentation, for example).  These
+% objectives will specify the *Definition of Done* for the overall project.
+
+- Implement OpenTracing in our .Net Diary application
+    How do we do this?
+    Add some code to our existing apps or have an extra app for this?
+    Only to the ones running in Kubernetes?
+    Use OpenTracing or .Net Core 3 version of opentracing?
+
+- Run Distributed Tracing System locally and in AKS (helm chart?)
+    Deliver a helm chart that can be deployed to any clsuter
+
+- Visualise traces from OpenTracing in Distributed Tracing System
+    Add tags, labels, whatever is needed to track requests meaningfully
+    within our applications.
+
+\section{Work Plan}
+
+% Describe the overall approach and the different work packages of work that will need to be undertaken in order to
+% achieve the stated objectives.  Each work package should have a title, short description, an assigned outcome
+% (Definition of Done), a due date and a list of assignees (student, employer etc) including the lead responsible for
+% ensuring the work is completed.  An example of a work package might be "Deploy Release 1.0 (Prototype 1) to Employer
+% Infrastructure".
+
+Investigation into different Tracing frameworks.
+- Opentracing or Built in .Net3 tracing?
+- Produce some sort of documentation to justify the decision.
+
+Investigation into Distributed Tracing System.
+- Choose an appropriate Distributed Tracing System (Zipkin, LighStep, Jaeger, etc.)
+- Explain why I choose the on I did.
+
+Deploy helm chart to local Kubernetes cluster.
+
+Deploy helm chart to ResDiary AKS staging cluster.
+
+Deploy helm chart to ResDiary AKS production cluster.
+
+\bibliographystyle{plainnat}
+
+\bibliography{bibliography}
+
+\end{document}
