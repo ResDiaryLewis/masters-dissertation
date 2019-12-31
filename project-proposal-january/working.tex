@@ -38,9 +38,9 @@ ResDiary provides its customers with a reservation and table management system f
 
 To improve the process of pinpointing potential areas of improvement, we are eager to introduce \textit{Distributed Tracing} to our appliactions.
 \begin{quote}
-    Distributed tracing helps pinpoint where failures occur and what causes poor performance. \cite{opentracing.io/docs}
+    "Distributed tracing helps pinpoint where failures occur and what causes poor performance." \cite{opentracing}
 \end{quote}  
-With this in mind, we expect this method to assist us in identifying issues in our software that we can address either with an immediate quick fix, or a with a complete overhaul of a particular software component, sql query, etc.
+With this in mind, we expect this method to assist us in identifying issues in our software that we can address either with an immediate quick fix, or with a complete overhaul of a particular software component, sql query, etc.
 
 \section{Problem Description}
 
@@ -48,23 +48,31 @@ With this in mind, we expect this method to assist us in identifying issues in o
 % your employer, a sector, or the wider software industry?), and associated evidence in support of your description of the
 % problem (conversations with team members, literature, personal diary entries).
 
-Occasioanl long request times, 
+\subsection{The nature of the problem}
 
-With the growing trend of microservices, orchestrated into large-scale applications, it becomes more challenging to trace errors in the code, to spot bottle-necks and slow parts of the application, to find buggy code or to simply find areas of improvement. For example, when a request to a web application takes longer than expected, it is difficult to determine if this was caused by part of the application code, a database query, perhaps some code in another web-app that the request gets routed to or a call to a third party application/library.
+With the growing trend of microservices, orchestrated into large-scale applications, it becomes more challenging to trace errors in the code, to spot bottle-necks and slow parts of the application, to find buggy code or simply to find areas of improvement. For example, when a request to a web application takes longer than expected, it is difficult to determine if this was caused by part of the application code, a database query, some code in another application that the request gets routed to or a call to a third party library.
 
 At ResDiary we currently have no distinct approach to investigate the cause for slow or failing requests. At the moment we resort to log messages and graphs depicting the health and/or uptime of components and infrastructure. This approach can be very broad and slow as it takes time to pin down the exact nature of an issue and may involve some guesses and investigation into a wrong direction at first. 
 
+\subsection{The symptoms}
+
+Doing this kind of investigation into incidents often requires multiple people to get involved. A recent incident I can recall got three members of my team involved, the team leader to check the logs produced by our application, the database administrator to check the SQL query store for any signs of poor performing queries, and another to go through the logs of our infrastructure, namely the Kubernetes resources which are hosting the application.\\
+This is not ideal, consuming precious time that could have been spent elsewhere.
+
+When it comes to a support incident that affects customers directly it is crucial to resolve the situation promptly or at least release a status update as to the nature of the problem and the approximate expected duration of the incident. Currently the response time fluctuates widely due to the aforementioned reason of potentially long investigation times.
+
+From my weekly diary entries I take another example of a symtpom. As part of some improvement work, we did some SQL query tuning to increase the performance of the query. At the same time we altered the code slightly so that the query itself was executed fewer number of times. Both changes went out in the same release. It was then difficult to say if the changes had the expected positive impact on the users requests as there are many components involved in a request. We monitored the performance over some time and could conclude that overall, the request time did reduce as anticipated. But even then, it was almost impossible to say which of the two changes had made a bigger impact.
+
+Having the ability to trace an incoming request from start to finish, and timing how much time it takes within the different components and perhaps even functions and methods of the whole application would expose root causes for failing or slow requests much quicker.\\
+It would expectedly require less working hours and people to fix issues. On-call developers would be able to resolve incidents faster and minimise customer impact. Changes made to existing software could be monitored and evaluated with reduced effort and time.
+
+\subsection{Evidence in support of the problem}
+
+% TODO: Evidence in support of problem description.
+
+\subsection{Extend of the problem}
 
 
-
-
-Tracing an incoming request from start to finish, and timing how much time it takes within the different components and perhaps even functions and methods of the whole application would shed some light onto those existing issues and provide a clear and straight forward way of determining areas of improvment.
-
-Another aspect where we would hope to see benefits from such a tool, is an improved ...(response/reaction/fixing) time for our on-call developers who deal with alerts relating to our web-applications and databases. Allwoing them to use a 'Distributed Tracing System' to track for example slow or failing requests from users would give them an insight into where the problem occurs and allow them to fix it faster.
-
-- How do we trace errors at the moment (Grafana, Stackify, Kibana)?
-
-- Experiences at ResDiary: Query tuning (try to improve response time of a request, only after the enhancements were made, deployed and observed over time in production, we can say for sure if the improvements to the query had an impact. This is a slow process, through tracing we could say for sure beforehand if the query was the issue, the thing that took too long.)
 
 \section{Objectives} 
 
@@ -72,9 +80,11 @@ Another aspect where we would hope to see benefits from such a tool, is an impro
 % experimentation or artefacts delivered (including software code, data sets, process documentation, for example).  These
 % objectives will specify the *Definition of Done* for the overall project.
 
-The choice of an appropriate \textit{Tracing Framework} is part of the Work Plan (see section \ref{WorkPlan}), hence for now I will refer to it as \textit{Tracing Framework}. Possible choices are \textit{OpenTracing} and \textit{.NET Core 3.0 Diagnostics}.
+The choice of an appropriate Tracing Framework is part of the Work Plan (see section \ref{WorkPlan}), hence for now I will refer to it as \textit{Tracing Framework}. Possible choices are \textit{OpenTracing} and \textit{.NET Core 3.0 Diagnostics}.
 
-In the same manner, I will refer to the eventual implementation choice of the \textit{Distributed Tracing System} such as \textit{Jaeger} or \textit{ZipKin} simply as \textit{Distributed Tracing System}.
+In the same manner, I will refer to the eventual implementation choice of the Distributed Tracing System such as \textit{Jaeger} or \textit{ZipKin} simply as \textit{Distributed Tracing System}.
+
+The following objectives are to be completed within the scope of this project:
 
 \textbf{1.} The \textit{Tracing Framework} is implemented in our \textit{.NET Core} applications.
 
@@ -94,7 +104,7 @@ In the same manner, I will refer to the eventual implementation choice of the \t
 \textbf{6.} Delivered an experience report from the DevOps team and on-call developers at ResDiary, discussing some of the following concerns:
 \begin{itemize}
     \item How has this new approach affected the process of finding issues in general?
-    \item How has it affected the time to get to the bottom of (and resolve) an on-call support incidents?
+    \item How has it affected the time to get to the bottom of (and resolve) an on-call support incident?
     \item Does this additional tool increase your confidence to track and resolve issues while on-call or in your everyday work?
     \item Does the data gathered and depicted in the \textit{Distributed Tracing System} provide useful indications for areas of improvement.
 \end{itemize}
@@ -122,19 +132,19 @@ In the same manner, I will refer to the eventual implementation choice of the \t
 % \hline
 % \end{tabular}
 
-\textbf{Decide on \textit{Tracing Framework} (16.10.2020)}\\
+\textbf{Decide on Tracing Framework (16.10.2020)}\\
 Investigate the differences, pros and cons between frameworks (OpenTracing, etc.) and choose the most appropriate one.\\
 Outcome: Brief statement justifying the decision.\\
 Assignees: Nicola M\"{o}ssner*
 
-\textbf{Decide on \textit{Distributed Tracing System} (16.10.2020)}\\
+\textbf{Decide on Distributed Tracing System (16.10.2020)}\\
 Investigate the differences, pros and cons between systems (Zipkin, LighStep, Jaeger, etc.) and choose the most appropriate one.\\
 Outcome: Brief statement justifying the decision.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Instrument applications with Tracing Framework (30.10.2020)}\\
-The existing .NET Core applications need to be instrumented with the tracing framework for it to be able to trace requests. \\
-Outcome: \\
+The existing .NET Core applications need to be instrumented with the tracing framework for it to be able to trace requests and export them to a third-party application.\\
+Outcome: Applications are instrumented with the tracing framework and export the tracing data.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Deploy Distributed Tracing System locally (06.11.2020)}\\
@@ -142,9 +152,9 @@ Configure and deploy a helm chart for the Distributed Tracing System on a local 
 Outcome: All resources are created as expected and Pods are running in local Kubernetes cluster.\\
 Assignees: Nicola M\"{o}ssner*
 
-\textbf{Tracing Framework communicating with Distributed Tracing System locally (27.11.2020)}\\
-...\\
-Outcome: \\
+\textbf{Tracing Framework is communicating with Distributed Tracing System locally (27.11.2020)}\\
+The traces need to be exposed by the tracing framework from the applications so that the Distributed Tracing System can gather the data.\\
+Outcome: The Distributed Tracing System can collect traces from the applications running locally.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Deploy Distributed Tracing System to staging environment (01.01.2021)}\\
@@ -152,42 +162,42 @@ Configure and deploy a helm chart for the Distributed Tracing System on a local 
 Outcome: All resources are created as expected and Pods are running in ResDiary AKS staging cluster.\\
 Assignees: Nicola M\"{o}ssner*
 
-\textbf{Tracing Framework communicating with Distributed Tracing System in staging environment (15.01.2021)}\\
-...\\
-Outcome: \\
+\textbf{Tracing Framework is communicating with Distributed Tracing System in staging environment (15.01.2021)}\\
+The traces need to be exposed by the tracing framework from the applications so that the Distributed Tracing System can gather the data.\\
+Outcome: The Distributed Tracing System can collect traces from the applications running in the staging environment.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Mid-point demonstration (09.04.2021)}\\
 Give a demonstration of the current state of the project to the employer.\\
 Outcome: Current state demonstrated and feedback collected.\\
-Assignees: Nicola M\"{o}ssner*
+Assignees: Nicola M\"{o}ssner*, Adam Connelly
 
 \textbf{Deploy Distributed Tracing System to production environment (28.01.2021)}\\
 Configure and deploy a helm chart for the Distributed Tracing System on a local Kubernetes cluster.\\
 Outcome: All resources are created as expected and Pods are running in ResDiary AKS production cluster.\\
 Assignees: Nicola M\"{o}ssner*
 
-\textbf{Tracing Framework communicating with Distributed Tracing System in production environment (12.02.2021)}\\
-...\\
-Outcome: \\
+\textbf{Tracing Framework is communicating with Distributed Tracing System in production environment (12.02.2021)}\\
+The traces need to be exposed by the tracing framework from the applications so that the Distributed Tracing System can gather the data.\\
+Outcome: The Distributed Tracing System can collect traces from the applications running in the production environment.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Visualise meaningful traces in Distributed Tracing System (26.02.2021)}\\
-...\\
-Outcome: \\
+The traces will need to be organised and labelled/tagged in a manner that is helpful for the people that will use the system.\\
+Outcome: Traces are visualised in a meaningful way.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Finish experience report of developers using the tool (26.03.2021)}\\
-...\\
-Outcome: \\
-Assignees: Nicola M\"{o}ssner*
+The developers will give feedback in form of a survey as to their experience with the new tool. All answers will be compiled to a report, giving some indication as to how benefial the tool is for this particular company.\\
+Outcome: The report is completed and ready to be presented to the company and university.\\
+Assignees: Nicola M\"{o}ssner*, DevOps team members, On-call developers
 
-\textbf{Finish demonstration and handover (09.04.2021)}\\
+\textbf{Complete demonstration and handover (09.04.2021)}\\
 Give a demonstration of the final state of the project to the employer and handover all artefacts.\\
 Outcome: Final state demonstrated, artefacts handed over and feedback collected.\\
-Assignees: Nicola M\"{o}ssner*
+Assignees: Nicola M\"{o}ssner*, Adam Connelly
 
-* Signifies the lead responsible for ensuring the work is completed.
+* Indicates the lead responsible for ensuring the work is completed.
 
 \bibliographystyle{plainnat}
 
