@@ -73,17 +73,17 @@ When it comes to a support incident that affects customers directly it is crucia
 
 From my weekly diary entries, I take another example of a symptom. As part of some improvement work, we did some SQL query tuning to increase the performance of a query. At the same time, we altered the code slightly so that the query itself was executed fewer times. Both changes went out in the same release. It was then difficult to say if the changes had the expected positive impact on the users' requests as there are many components involved in a request. We monitored the performance over some time and could conclude that overall, the request time did reduce as anticipated. But even then, it was almost impossible to say which of the two changes had made a bigger impact.
 
-Having the ability to trace an incoming request from start to finish, and timing how much time it takes within the different components and perhaps even functions and methods of the whole application would expose root causes for failing or slow requests much quicker.\\
+Having the ability to trace an incoming request from start to finish, and measuring how much time it takes within the different components and perhaps even functions and methods of the whole application would expose root causes for failing or slow requests much quicker.\\
 It would expectedly require less working hours and people to fix issues. On-call developers would be able to resolve incidents faster and minimise customer impact. Changes made to existing software could be monitored and evaluated with reduced effort and time.
 
 \subsection{Evidence in support of the problem}
 
 % TODO: Evidence in support of problem description.
 
-\subsection{Extend of the problem}
+\subsection{Extent of the problem}
 
 A majority of software projects involve a Maintenance phase of some form or another and will therefore face this problem sooner or later. The specifics of the symptoms may differ across software solutions, but in general, there will be similarities in the process of dealing with them.\\
-In some cases, no further actions are required as (improving the software is not necessary for different reasons so no monitoring or investigations are undertaken but for most projects, I think further improvements are essential to stay competitive and provide a secure product)
+In some cases, no further actions are required as improving the software is not necessary for different reasons so no monitoring or investigations are undertaken but for most projects, I think further improvements are essential to stay competitive and provide a secure product.
 
 \section{Objectives} 
 
@@ -117,7 +117,7 @@ The following objectives are to be completed within the scope of this project:
     \item How has this new approach affected the process of finding issues in general?
     \item How has it affected the time to get to the bottom of (and resolve) an on-call support incident?
     \item Does this additional tool increase your confidence to track and resolve issues while on-call or in your everyday work?
-    \item Does the data gathered and depicted in the Distributed Tracing System provide useful indications for areas of improvement.
+    \item Does the data gathered and depicted in the Distributed Tracing System provide useful indications for areas of improvement?
 \end{itemize}
 
 \section{Work Plan}
@@ -135,11 +135,14 @@ Investigate the differences, pros, and cons between frameworks (OpenTracing, etc
 \textbf{Assignees:} Nicola M\"{o}ssner*
 
 \textbf{Decide on Distributed Tracing System (16.10.2020)}\\
-Investigate the differences, pros, and cons between systems (Zipkin, LighStep, Jaeger, etc.) and choose the most appropriate one.\\
+Investigate the differences, pros, and cons between systems (Zipkin, LightStep, Jaeger, etc.) and choose the most appropriate one.\\
 Outcome: Brief statement justifying the decision.\\
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Instrument applications with Tracing Framework (30.10.2020)}\\
+% How many .NET Core applications exist?
+% Will you instrument all of them?
+% Is the outcome of this task to have it approved in a PR, or to simply verify it in a local branch?
 The existing .NET Core applications need to be instrumented with the tracing framework for it to be able to trace requests and export them to a third-party application.\\
 Outcome: Applications are instrumented with the tracing framework and export the tracing data.\\
 Assignees: Nicola M\"{o}ssner*
@@ -155,7 +158,7 @@ Outcome: The Distributed Tracing System can collect traces from the applications
 Assignees: Nicola M\"{o}ssner*
 
 \textbf{Deploy Distributed Tracing System to staging environment (01.01.2021)}\\
-Configure and deploy a helm chart for the Distributed Tracing System on a local Kubernetes cluster.\\
+Configure and deploy a helm chart for the Distributed Tracing System on the ResDiary AKS staging cluster.\\
 Outcome: All resources are created as expected and Pods are running in ResDiary AKS staging cluster.\\
 Assignees: Nicola M\"{o}ssner*
 
@@ -164,13 +167,14 @@ The traces need to be exposed by the tracing framework from the applications so 
 Outcome: The Distributed Tracing System can collect traces from the applications running in the staging environment.\\
 Assignees: Nicola M\"{o}ssner*
 
+% Date is wrong here
 \textbf{Mid-point demonstration (09.04.2021)}\\
 Give a demonstration of the current state of the project to the employer.\\
 Outcome: Current state demonstrated and feedback collected.\\
 Assignees: Nicola M\"{o}ssner*, Adam Connelly
 
 \textbf{Deploy Distributed Tracing System to production environment (28.01.2021)}\\
-Configure and deploy a helm chart for the Distributed Tracing System on a local Kubernetes cluster.\\
+Configure and deploy a helm chart for the Distributed Tracing System on the ResDiary AKS production cluster.\\
 Outcome: All resources are created as expected and Pods are running in ResDiary AKS production cluster.\\
 Assignees: Nicola M\"{o}ssner*
 
@@ -181,6 +185,7 @@ Assignees: Nicola M\"{o}ssner*
 
 \textbf{Visualise meaningful traces in Distributed Tracing System (26.02.2021)}\\
 The traces will need to be organised and labelled/tagged in a manner that is helpful for the people that will use the system.\\
+% Is this outcome too vague?
 Outcome: Traces are visualised in a meaningful way.\\
 Assignees: Nicola M\"{o}ssner*
 
